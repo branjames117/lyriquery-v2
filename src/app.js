@@ -34,15 +34,25 @@ export class App {
         title: "Submit",
       },
       {
+        route: "/results",
+        moduleId: PLATFORM.moduleName("results"),
+        title: "Results",
+        name: "results",
+      },
+      {
+        route: "/song/:id",
+        moduleId: PLATFORM.moduleName("song"),
+        title: "Song",
+      },
+      {
         route: "/artist/:artist",
         moduleId: PLATFORM.moduleName("artist"),
         title: "Artist",
       },
       {
-        route: "/results",
-        moduleId: PLATFORM.moduleName("results"),
-        title: "Results",
-        name: "results",
+        route: "/artist/:artist/:album",
+        moduleId: PLATFORM.moduleName("album"),
+        title: "Album",
       },
     ]);
 

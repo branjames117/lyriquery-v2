@@ -11,6 +11,7 @@ export class WebAPI {
   }
 
   getDatabase() {
+    this.isRequesting = true;
     return this.http
       .get("http://localhost:3000/database", {
         headers: {
@@ -18,11 +19,14 @@ export class WebAPI {
         },
       })
       .then((response) => response.json())
-      .then((data) => data);
+      .then((data) => {
+        this.isRequesting = false;
+        return data;
+      });
   }
 
   getResults(params) {
-    console.log("params", params);
+    this.isRequesting = true;
     return this.http
       .fetch("http://localhost:3000/search", {
         method: "post",
@@ -32,11 +36,14 @@ export class WebAPI {
         },
       })
       .then((response) => response.json())
-      .then((data) => data);
+      .then((data) => {
+        this.isRequesting = false;
+        return data;
+      });
   }
 
   getArtist(params) {
-    console.log("params", params);
+    this.isRequesting = true;
     return this.http
       .fetch("http://localhost:3000/artist", {
         method: "post",
@@ -46,6 +53,43 @@ export class WebAPI {
         },
       })
       .then((response) => response.json())
-      .then((data) => data);
+      .then((data) => {
+        this.isRequesting = false;
+        return data;
+      });
+  }
+
+  getAlbum(params) {
+    this.isRequesting = true;
+    return this.http
+      .fetch("http://localhost:3000/album", {
+        method: "post",
+        body: JSON.stringify(params),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) => response.json())
+      .then((data) => {
+        this.isRequesting = false;
+        return data;
+      });
+  }
+
+  getSong(params) {
+    this.isRequesting = true;
+    return this.http
+      .fetch("http://localhost:3000/song", {
+        method: "post",
+        body: JSON.stringify(params),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) => response.json())
+      .then((data) => {
+        this.isRequesting = false;
+        return data;
+      });
   }
 }
