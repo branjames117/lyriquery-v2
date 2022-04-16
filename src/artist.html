@@ -1,0 +1,70 @@
+<template>
+  <h2 id="top">All Songs by ${artist}</h2>
+  <a href="/submit"
+    ><div class="form-group d-flex flex-column">
+      <button class="btn btn-primary">Add New</button>
+    </div></a
+  >
+  <table class="table table-striped full-table table-hover" id="results-table">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">Artist</th>
+        <th scope="col">Album</th>
+        <th scope="col">Track</th>
+        <th scope="col">Song</th>
+        <th scope="col">Feat.</th>
+        <th scope="col">Year</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr repeat.for="song of songs">
+        <td><a href="/artist/${song.artist}">${song.artist}</a></td>
+        <td>
+          <a href="/artist/${song.artist}/${song.album}">${song.album}</a>
+        </td>
+        <td>${song.trackNumber}</td>
+        <td><a href="/song/${song._id}">${song.title}</a></td>
+        <td>${song.featuredArtists}</td>
+        <td>${song.year}</td>
+        <td>
+          <form action="/submit" method="post">
+            <button
+              class="btn btn-primary btn-sm m-0"
+              onclick="this.form.submit()"
+              name="update"
+              value="${song.id}"
+            >
+              <i class="fa fa-pencil"></i>
+            </button>
+          </form>
+        </td>
+        <td>
+          <form action="/delete" method="post">
+            <button
+              class="btn btn-primary btn-sm m-0"
+              onclick="this.form.submit()"
+              name="delete"
+              value="${song.id}"
+            >
+              <i class="fa fa-trash"></i>
+            </button>
+          </form>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <a href="/submit"
+    ><div class="form-group d-flex flex-column">
+      <button class="btn btn-primary">Add New</button>
+    </div></a
+  >
+
+  <a click.trigger="scrollToTop()"
+    ><div class="form-group d-flex flex-column">
+      <button class="btn btn-primary">Return to Top</button>
+    </div></a
+  >
+</template>

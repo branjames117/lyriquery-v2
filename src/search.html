@@ -1,0 +1,34 @@
+<template>
+  <form action="/results" method="post">
+    <div class="form-group d-flex flex-column">
+      <label for="artist">Artist</label>
+      <input
+        tabindex="1"
+        class="form-control"
+        type="text"
+        id="artist"
+        name="artist"
+        value.bind="artist"
+        placeholder="Artist"
+      />
+      <label for="query"> LyriQuery <span class="text-danger">*</span> </label>
+      <input
+        tabindex="2"
+        required
+        class="form-control"
+        type="text"
+        id="query"
+        name="query"
+        value.bind="query"
+        placeholder="Phrase"
+      />
+      <a
+        class="btn btn-primary mt-4"
+        tabindex="3"
+        route-href="route: results; params.bind: { artist: artist, query: query }"
+      >
+        Lyri<i class="fa fa-search"></i>uery
+      </a>
+    </div>
+  </form>
+</template>

@@ -1,0 +1,43 @@
+<template>
+  <h2>Documentation</h2>
+
+  <p>
+    LyriQuery is a lyrics database requested by Shannon Hayes, who wanted to be able to find the exact specific Taylor Swift lyric to match the moods of her Instagram stories and Facebook posts. It is developed by Brandon James Hoskins using
+    <a href="https://nodejs.org/en/">Node.js</a>,
+    <a href="https://expressjs.com/">Express.js</a>,
+    <a href="https://mongoosejs.com/">Mongoose</a> and the
+    <a href="https://aurelia.io/">Aurelia.js</a> framework. It uses
+    <a href="https://www.mongodb.com/">MongoDB</a> for its database and <a href="https://getbootstrap.com/">Bootstrap 5</a> for CSS styling. This is version 2.0 of the app, rebuilt from using EJS to Aurelia, so that the author could become familiar with the framework.
+  </p>
+
+<p>Access the GitHub repository at <a href="https://github.com/branjames117/lyriquery">https://github.com/branjames117/lyriquery</a>.</p>
+
+<h3>Performing Queries</h3>
+<p>
+  From the / route, enter the name of the artist as well as a phrase. This will query MongoDB, first pulling in all songs by the specified artist,
+  then looping through each and every song, line by line, looking for matches to your query. When a match is found, that line, as well as pertinent data, is pushed onto an array of match objects, which is then sent along with you to the /results route,
+  where it is iterated over and converted into a table. This table is sortable thanks to the Willmaster Table Sort script by Will Bontrager, 2011. String methods on both ends make queries a little more forgivable, so "i'm in exile" will return lines containing "I'm in exile," and "seeing you out" will return lines containing "seein' you out" (but the reverse is not true: "seein' you out" will not return "seeing you out"). As well, special characters like commas, periods, semicolons, quotation marks and parentheses will be ignored.
+</p>
+
+<h3>Submitting Lyrics</h3>
+<p>
+  Before queries can be performed, the database must be populated using the
+  /submit route.
+</p>
+<p><strong>Guidelines for database entry</strong>
+  <ul>
+    <li>All fields except <em>Featured Artist(s)</em> and <em>Author(s)</em> are required.</li>
+    <li><em>Track Number</em> and <em>Year</em> must be numerical values.</li>
+    <li>Each new line of a song should start on a new line (carriage return).</li>
+    <li>If copying and pasting lyrics from the internet, remove extraneous lines like [Outro: Taylor Swift] and [Both singing now], otherwise they'll be counted as individual lines.</li>
+    <li>Extra line breaks (like the ones between stanzas) will be filtered out automatically, so you can leave them in.</li>
+  </ul>
+</p>
+
+<h3>Changelog</h3>
+<ul>
+  <li>2022-4-14: <em>ported app over to Aurelia.js from EJS.</em></li>
+  <li>2021-5-6: <em>fixed bug when editing songs from album page.</em></li>
+  <li>2021-5-4: <em>added LyriQuiz feature to home page.</em></li>
+</ul>
+</template>
