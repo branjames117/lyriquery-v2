@@ -1,34 +1,32 @@
 <template>
   <h2>Submit New Song</h2>
 
-<p><form action="/submit" method="post">
+<p><form submit.delegate="submitSong()">
   <div class="form-group d-flex flex-column">
 
   <label for='artist'>Artist <span class="text-danger">*</span></label>
-  <input required class='form-control' type='text' id='artist' name='artist' value="<%= song.artist %>" />
+  <input required class='form-control' type='text' id='artist' name='artist' value.bind="body.artist" />
 
   <label for='featured'>Featured Artist(s)</label>
-  <input class='form-control' type='text' id='featured' name='featured' value="<%= song.featuredArtist %>" />
+  <input class='form-control' type='text' id='featured' name='featured' value.bind="body.featuredArtist" />
 
   <label for='title'>Song Title <span class="text-danger">*</span></label>
-  <input required class='form-control' type='text' id='title' name='title' autocomplete='off' value="<%= song.title %>" />
+  <input required class='form-control' type='text' id='title' name='title' autocomplete='off' value.bind="body.title" />
 
   <label for='track'>Track Number <span class="text-danger">*</span></label>
-  <input required class='form-control' type='text' id='track' name='track' autocomplete='off' value="<%= song.trackNumber %>" />
+  <input required class='form-control' type='text' id='track' name='track' autocomplete='off' value.bind="body.trackNumber" />
   
   <label for='album'>Album <span class="text-danger">*</span></label>
-  <input required class='form-control' type='text' id='album' name='album' value="<%= song.album %>" />
+  <input required class='form-control' type='text' id='album' name='album' value.bind="body.album" />
     
   <label for='authors'>Author(s)</label>
-  <input class='form-control' type='text' id='authors' name='authors' value="<%= song.authors %>" />
+  <input class='form-control' type='text' id='authors' name='authors' value.bind="body.authors" />
     
   <label for='year'>Year <span class="text-danger">*</span></label>
-  <input required class='form-control' type='text' id='year' name='year' value="<%= song.year %>" />
+  <input required class='form-control' type='text' id='year' name='year' value.bind="body.year"/>
     
   <label for='lyrics'>Lyrics <span class="text-danger">*</span></label>
-  <textarea required class='form-control' type='text' id='lyrics' name='lyrics' rows='10'>
-<% song.lyrics.forEach(line => { %><%= line %>
-<% }) %></textarea>
-  <button class="btn btn-primary" type="submit" name="songID" value="<%= song._id %>">Submit to Database</button></div>
+  <textarea required class='form-control' type='text' id='lyrics' name='lyrics' rows='10' value.bind="body.lyrics"></textarea>
+  <button class="btn btn-primary" type="submit" name="songID" value="${id}">Submit to Database</button></div>
 </form></p>
 </template>

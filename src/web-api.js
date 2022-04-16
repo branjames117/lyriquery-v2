@@ -92,4 +92,21 @@ export class WebAPI {
         return data;
       });
   }
+
+  submitSong(body) {
+    this.isRequesting = true;
+    return this.http
+      .fetch("http://localhost:3000/submit", {
+        method: "post",
+        body: JSON.stringify(body),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) => response.json())
+      .then((data) => {
+        this.isRequesting = false;
+        return data;
+      });
+  }
 }
