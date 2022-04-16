@@ -6,7 +6,7 @@ router.post("/", (req, res) => {
   console.log(req.body);
   if (req.body.update) {
     Song.findOne({ _id: req.body.update }, (err, song) => {
-      if (err) console.log(err);
+      if (err) res.json(err);
       res.json(song);
     });
     // songID posted to submit route, must be an update in progress, redirect
@@ -28,7 +28,7 @@ router.post("/", (req, res) => {
         .filter((line) => line.length > 0);
       song.save((error) => {
         if (err) {
-          console.log(err);
+          res.json(err);
         } else {
           res.json(song);
         }
@@ -46,15 +46,16 @@ router.post("/", (req, res) => {
       authors: req.body.authors.replace(", ", ",").split(","),
       trackNumber: req.body.trackNumber,
       // split the lyrics input into an array of strings separated by \r\n, then filter out empty strings
-      lyrics: req.body.lyrics.split("\r\n").filter((line) => line.length > 0),
+      lyrics: req.body.lyrics.split("\n").filter((line) => line.length > 0),
     });
+    console.log(song);
     // check if song title/artist combination already exists in database
     Song.exists(
       { title: req.body.title, artist: req.body.artist },
       (err, doc) => {
-        if (err) console.log("error", err);
+        if (err) res.json(err);
         // if song already exists, send to error route
-        if (doc) console.log("song exists");
+        if (doc) res.json(doc);
         // else save it to the database
         song.save((error) => {
           if (error) {
